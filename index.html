@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nazi</title>
+    <link rel="icon" type="image/png" href="png3.png">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            height: 100%;
+            overflow: hidden;
+        }
+        .half {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .half img {
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <audio autoplay loop>
+        <source src="sound.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="half">
+        <img src="png1.JPG" alt="png1">
+    </div>
+
+    <div class="half">
+        <img src="png2.JPG" alt="png2">
+    </div>
+
+</body>
+</html>
