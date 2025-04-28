@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nazi</title>
+    <title>Naoi</title>
     <link rel="icon" type="image/png" href="png3.png">
     <style>
         html, body {
@@ -33,10 +33,7 @@
 </head>
 <body>
 
-    <audio autoplay loop>
-        <source src="sound.wav" type="audio/wav">
-        Your browser does not support the audio element.
-    </audio>
+    <audio id="bg-sound" autoplay loop></audio>
 
     <div class="half">
         <img src="png1.JPG" alt="png1">
@@ -45,6 +42,23 @@
     <div class="half">
         <img src="png2.JPG" alt="png2">
     </div>
+
+    <script>
+        // Update this URL to YOUR correct GitHub Pages URL!
+        const soundUrl = "https://tiembrent.github.io/nazi/sound.wav";
+
+        const audio = document.getElementById('bg-sound');
+        fetch(soundUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                const audioUrl = URL.createObjectURL(blob);
+                audio.src = audioUrl;
+                audio.play();
+            })
+            .catch(error => {
+                console.error("Failed to load sound.wav:", error);
+            });
+    </script>
 
 </body>
 </html>
