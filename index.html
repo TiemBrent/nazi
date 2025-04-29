@@ -11,6 +11,7 @@
             background: black;
             height: 100%;
             overflow: hidden;
+            cursor: pointer;
         }
         .half {
             width: 100%;
@@ -33,7 +34,7 @@
 </head>
 <body>
 
-    <audio id="bg-sound" autoplay loop></audio>
+    <audio id="bg-sound" loop></audio>
 
     <div class="half">
         <img id="img1" alt="png1">
@@ -44,7 +45,6 @@
     </div>
 
     <script>
-        // Base URL to your GitHub Pages
         const baseURL = "https://tiembrent.github.io/nazi/";
 
         // Set favicon
@@ -54,20 +54,30 @@
         document.getElementById('img1').src = baseURL + "png1.JPG";
         document.getElementById('img2').src = baseURL + "png2.JPG";
 
-        // Fetch and play sound
         const audio = document.getElementById('bg-sound');
+
+        // Fetch sound and try autoplay
         fetch(baseURL + "sound.wav")
             .then(response => response.blob())
             .then(blob => {
                 const audioUrl = URL.createObjectURL(blob);
                 audio.src = audioUrl;
-                audio.play().catch(error => {
-                    console.log("Autoplay blocked. User interaction needed.");
-                });
+
+                // Try to autoplay
+                return audio.play();
             })
             .catch(error => {
-                console.error("Failed to load sound.wav:", error);
+                console.warn("Autoplay blocked or failed. Waiting for user interaction...");
             });
+
+        // Play audio on any user interaction if autoplay fails
+        document.body.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play().catch(err => {
+                    console.error("User-triggered play failed:", err);
+                });
+            }
+        }, { once: true });
     </script>
 
 </body>
